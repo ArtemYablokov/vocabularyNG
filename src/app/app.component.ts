@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { BackendHttpService } from './services/backend-http.service';
 
 
 @Component({
@@ -9,81 +9,33 @@ import { HttpClient } from '@angular/common/http';
 })
 
 export class AppComponent implements OnInit {
+  constructor(private backendService: BackendHttpService) { }
+
   title = 'vocabulary'
 
-  result: Word[] = []
+  searchedWord?: string
 
-  constructor(private http: HttpClient) { }
+  representedResult: Word[] = []
 
   ngOnInit() {
-    this.result = this.words.filter(word => word.name === 'word')
+    // this.result = this.words.filter(word => word.name === 'word')
   }
 
-  handleInputChange(text: string) {
-    console.log('from parent = ' + text)
+  findWordByPrefix(prefix: string) {
+    
+    this.searchedWord = prefix // for passing current argument to childs
 
-    this.result = this.words.filter(word => word.name === text)
-
-    this.http.get('http://localhost:8080/health').subscribe(response => { console.log(response) })
-
+    if (prefix.trim()) {
+      this.representedResult = this.backendService.getWordsfromServer(prefix)
+    } else {
+      this.representedResult = []
+    }
 
   }
-
-  words: Word[] = [
-    { name: 'word', definition: 'indivisible part of sentence', searches: 9 },
-    { name: 'w', definition: 'n-th letter of english alphabet', searches: 4 },
-  ]
-
-
-  // items: Item[] = [
-  //   { id: 0, name: 'Teapot', feature: 'stout' }, { id: 1, name: 'Teapot1', feature: 'stout' }, { id: 2, name: 'Teapot2', feature: 'stout' }
-  // ];
-
-  // posts: Post[] = [
-  //   { title: 'Хочу выучить Angular компоненты', text: 'Я все еще учу компоненты', id: 1 },
-  //   { title: 'Следующий блок', text: 'Будет про директивы и еще про пайпы', id: 2 },
-  //   { title: 'Хочу выучить Angular компоненты', text: 'Я все еще учу компоненты', id: 3 },
-
-  // ]
-
 }
 
 export interface Word {
   name: string,
   definition: string,
-  searches: number
+  searches?: number
 }
-
-// export interface Post {
-//   title: string
-//   text: string
-//   id?: number
-// }
-
-// export interface Item {
-
-//   id: number,
-//   name: string,
-//   feature?: string
-// }
-
-
-// export class Item {  
-
-//   constructor(
-//     public id: number,
-//     public name: string,
-//     public feature?: string,
-//     public url?: string,
-//     public rate = 100,
-//     ) {}
-
-// }
-
-
-  // items = [
-  //   'Apple iPhone 7',
-  //   'Huawei Mate 9',
-  //   'Samsung Galaxy S7',
-  //   'Motorola Moto Z',
-  // ]

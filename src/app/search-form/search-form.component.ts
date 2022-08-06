@@ -2,12 +2,12 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-post-form',
-  templateUrl: './post-form.component.html',
-  styleUrls: ['./post-form.component.scss']
+  templateUrl: './search-form.component.html',
+  styleUrls: ['./search-form.component.scss']
 })
 export class PostFormComponent implements OnInit {
 
-  text: string = 'word'
+  text!: string
 
   constructor() { }
 
@@ -18,11 +18,6 @@ export class PostFormComponent implements OnInit {
   }
 
   passChangesToParent() {
-
-    if (this.text.trim()) {
-      console.log('from child = ' + this.text)
       this.searchFieldUpdated.emit(this.text)
-    }
   }
-
 }

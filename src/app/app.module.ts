@@ -5,21 +5,25 @@ import { HttpClientModule } from '@angular/common/http';
 
 
 import { AppComponent } from './app.component';
-import { PostFormComponent } from './post-form/post-form.component';
+import { PostFormComponent } from './search-form/search-form.component';
 import { WordComponent } from './word/word.component';
+import { AddWordComponent } from './add-word/add-word.component';
+import { BackendHttpService } from './services/backend-http.service';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     PostFormComponent,
-    WordComponent
+    WordComponent,
+    AddWordComponent, 
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [BackendHttpService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

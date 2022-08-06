@@ -15,4 +15,9 @@ export class WordComponent implements OnInit {
 
   @Input() word!: Word
 
+  showDefinition: boolean = false
+
+  revealOrHideWordDefinition() {
+    this.showDefinition = !this.showDefinition
+  }
 }
