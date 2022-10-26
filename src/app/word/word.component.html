@@ -1,13 +1,8 @@
 <div class="card">
-    <!-- <h2>{{word.name}}</h2> -->
-    <!-- <p>{{word.definition}}</p> -->
+  <!-- go to word card (or build in it in this block) -->
+  <!-- НУЖЕН ОТДЕЛЬНЫЙ СТИЛЬ ДЛЯ АКТИВНЫХ КНОПОК -->
 
-    <!-- go to word card (or build in it in this block) -->
-    <!-- НУЖЕН ОТДЕЛЬНЫЙ СТИЛЬ ДЛЯ АКТИВНЫХ КНОПОК -->
-    <button class="btn" (click)="revealOrHideWordDefinition()">{{word.name}}</button>
-
-    <div *ngIf="showDefinition">
-        <!-- сделать карточку слова (WORD CARD) отдельным компонентом -->
-        {{word.definition}}
-    </div>
+  <!-- сделать карточку слова (WORD CARD) отдельным компонентом -->
+  <button class="btn" (click)="revealOrHideWord()">{{word.name}}</button>
+  <div *ngIf="showDefinition">{{word.definition}}</div>
 </div>

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Word } from '../app.component';
+import {Word} from "../model/Word";
 
 @Component({
   selector: 'app-word',
@@ -17,7 +17,7 @@ export class WordComponent implements OnInit {
 
   showDefinition: boolean = false
 
-  revealOrHideWordDefinition() {
+  revealOrHideWord() {
     this.showDefinition = !this.showDefinition
   }
 }

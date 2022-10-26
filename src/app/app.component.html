@@ -1,20 +1,16 @@
 <div>
 
   <div class="border">
-    <app-post-form (searchFieldUpdated)="findWordByPrefix($event)"></app-post-form>
+    <app-search-line (prefixUpdated)="findWordByPrefix($event)"></app-search-line>
 
-
-    <div *ngIf="representedResult.length > 0 ; else noWords">
+    <div *ngIf="!wordNotFound() ; else noWords">
       <p>Results from DB:</p>
-      <app-word *ngFor="let word of representedResult" [word]="word"></app-word>
+      <app-word *ngFor="let word of wordsFound" [word]="word"></app-word>
     </div>
 
-  
     <!-- на самом деле логика сложнее - если в возвращенном списке нет точно такого же слова - тогда появится кнопка добавить -->
     <ng-template #noWords>
-      
-      <app-add-word style=" position: absolute; bottom: 3rem;" [wordToSave]="searchedWord">
-      </app-add-word>
+      <app-add-word [wordToSave]="searchedPrefix"></app-add-word>
     </ng-template>
 
 

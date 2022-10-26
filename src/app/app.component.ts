@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { BackendHttpService } from './services/backend-http.service';
+import {Component, OnInit} from '@angular/core';
+import {BackendHttpService} from './services/backend-http.service';
+import {Word} from "./model/Word";
 
 
 @Component({
@@ -9,33 +10,33 @@ import { BackendHttpService } from './services/backend-http.service';
 })
 
 export class AppComponent implements OnInit {
-  constructor(private backendService: BackendHttpService) { }
+  constructor(private backendService: BackendHttpService) {
+  }
 
   title = 'vocabulary'
 
-  searchedWord?: string
+  searchedPrefix: string = ''
 
-  representedResult: Word[] = []
+  wordsFound: Word[] = []
 
   ngOnInit() {
+    // дернуть хелсчек для Initializing Spring DispatcherServlet 'dispatcherServlet'
     // this.result = this.words.filter(word => word.name === 'word')
   }
 
   findWordByPrefix(prefix: string) {
-    
-    this.searchedWord = prefix // for passing current argument to childs
-
-    if (prefix.trim()) {
-      this.representedResult = this.backendService.getWordsfromServer(prefix)
-    } else {
-      this.representedResult = []
-    }
-
+    this.searchedPrefix = prefix
+    this.wordsFound = prefix.trim() ? this.backendService.getWordsFromServer(prefix) : [];
   }
-}
 
-export interface Word {
-  name: string,
-  definition: string,
-  searches?: number
+  wordNotFound() {
+    // return this.wordsFound.length > 0
+
+    if (this.searchedPrefix) {
+      const word = this.wordsFound.find(w => w.name == this.searchedPrefix);
+      debugger
+      return word === undefined
+    } else
+      return true
+  }
 }

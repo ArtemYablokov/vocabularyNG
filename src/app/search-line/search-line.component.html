@@ -1,0 +1,8 @@
+<div>
+  <!-- <input type="text" class="form-control" placeholder="Text..."> -->
+  <!-- <button class="btn">Add new word</button> -->
+
+  <!-- because of (ngModelChange) -> constantly updated -->
+  <input type="text" class="form-control" [(ngModel)]="prefix" placeholder='Word to search...'
+         (ngModelChange)="passPrefixToAppComponent()">
+</div>

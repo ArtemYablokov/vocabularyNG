@@ -1,8 +1,5 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-
-import { Word } from '../app.component';
-
+import {HttpClient} from '@angular/common/http';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-add-word',
@@ -11,9 +8,10 @@ import { Word } from '../app.component';
 })
 export class AddWordComponent implements OnInit {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
-  @Input() wordToSave?: string
+  @Input() wordToSave!: string
 
   @Output() resetBoolean = new EventEmitter<string>();
 
@@ -26,12 +24,13 @@ export class AddWordComponent implements OnInit {
   addNewWord() {
 
     this.resetBoolean.emit()
-     
-    this.http.put('http://localhost:8080/add',
-     {'name': this.wordToSave, 'definition': this.definition})
 
-      .subscribe(response => {
-        console.log(response)
-      })
+    this.http.put('http://localhost:8080/add',
+      {'name': this.wordToSave, 'definition': this.definition})
+
+      .subscribe(
+        response => {
+          console.log(response)
+        })
   }
 }
