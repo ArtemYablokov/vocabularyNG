@@ -25,13 +25,25 @@ export class BackendHttpService {
     this.http.get<string[]>(url, {params: new HttpParams().set("prefix", prefix)})
       .subscribe(response => {
         console.log(response)
-        if (response) {
-          response.forEach(str => {
-            result.push({name: prefix, definition: str})
-          })
-        }
+        // if (response) {
+        //   response.forEach(str => {
+        //     result.push({name: prefix, definition: str})
+        //   })
+        // }
       })
 
+    return result
+  }
+
+  addNewWord(word: Word): string {
+    let result: any = ''
+    this.http.put('http://localhost:8080/new', word)
+      .subscribe(
+        response => {
+          console.log(response)
+
+          result = response
+        })
     return result
   }
 }

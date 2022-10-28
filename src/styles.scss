@@ -15,9 +15,12 @@ body {
 }
 
 .container {
-  max-width: 1000px;
+  max-width: 800px;
   margin: 0 auto;
+  //margin-top: 5rem;
   padding-top: 1rem;
+  background-color: #ecf7ff;
+  border-radius: 1rem;
 }
 
 a {
@@ -38,11 +41,12 @@ img {
 
 .btn {
   display: inline-block;
-  background: #333333;
+  background: #2e76bf;
   color: #fff;
   padding: 0.4rem 1.3rem;
   font-size: 1rem;
   border: none;
+  border-radius: 1rem;
   cursor: pointer;
   margin-right: 0.5rem;
   transition: opacity 0.2s ease-in;
@@ -79,10 +83,10 @@ hr {
   margin: .5rem 0;
 }
 
-.border {
-
-  padding: 2rem;
-  border: rgb(124, 187, 203) 5px dotted;
-  margin: 3rem;
-  background-color: rgb(223 237 249);
-}
+//.border {
+//
+//  padding: 2rem;
+//  border: rgb(124, 187, 203) 5px dotted;
+//  margin: 3rem;
+//  background-color: rgb(223 237 249);
+//}

@@ -39,4 +39,13 @@ export class AppComponent implements OnInit {
     } else
       return true
   }
+
+  showAddNewWord: boolean = false
+
+  addNewWordOrHideForm: string = 'Add new word'
+
+  addNewWordClicked() {
+    this.showAddNewWord = !this.showAddNewWord
+    this.addNewWordOrHideForm = this.showAddNewWord ? 'Hide form' : 'Add new word'
+  }
 }

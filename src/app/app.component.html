@@ -1,21 +1,26 @@
-<div>
-
-  <div class="border">
+<div class="container">
+  <div>
     <app-search-line (prefixUpdated)="findWordByPrefix($event)"></app-search-line>
 
-    <div *ngIf="!wordNotFound() ; else noWords">
+    <div *ngIf="!wordNotFound()">
       <p>Results from DB:</p>
       <app-word *ngFor="let word of wordsFound" [word]="word"></app-word>
     </div>
 
     <!-- на самом деле логика сложнее - если в возвращенном списке нет точно такого же слова - тогда появится кнопка добавить -->
-    <ng-template #noWords>
+    <button class="btn" (click)="addNewWordClicked()">
+      {{addNewWordOrHideForm}}
+    </button>
+
+    <div *ngIf="showAddNewWord">
       <app-add-word [wordToSave]="searchedPrefix"></app-add-word>
-    </ng-template>
+    </div>
 
 
-    <button style="margin-bottom: 1rem;" class="btn">Find a word in an internet</button>
-    <p>definition from internet / or info that no definitions found</p>
+
+<!--    <button style="margin-bottom: 1rem;" class="btn">Find a word in an internet</button>-->
+<!--    <p>definition from internet / or info that no definitions found</p>-->
+
 
 
   </div>
