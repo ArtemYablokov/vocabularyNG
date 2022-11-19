@@ -1,7 +1,6 @@
 
 export interface Word {
   name: string
-  definition: string
   searches?: number
   parts: Part[]
 }
@@ -9,8 +8,8 @@ export interface Word {
 export interface Part {
   name: string;
   definitions: Definition[]
-  synonyms: string[]
-  antonyms: string[]
+  synonyms: SynonymAntonym[]
+  antonyms: SynonymAntonym[]
 }
 
 export interface Definition {
@@ -22,3 +21,8 @@ export interface Definition {
 interface Phrase {
   name: string
 }
+
+interface SynonymAntonym {
+  name: string
+}
+

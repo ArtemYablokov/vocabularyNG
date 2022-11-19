@@ -22,19 +22,20 @@ export class AddWordComponent implements OnInit {
 
   addNewWord() {
     // this.resetBoolean.emit()
+    this.word.name = this.wordToSave
     this.backendService.addNewWord(this.word)
   }
 
   addAntonym(index: number) {
     const part = this.word.parts[index];
-    part.synonyms.push('')
+    part.antonyms.push(this.getEmptyPart())
   }
 
   addSynonym(part: Part) {
     const parts = this.word.parts;
     const componentPart = parts.find(p => p.name === part.name);
     if (componentPart) {
-      componentPart.synonyms.push('')
+      componentPart.synonyms.push(this.getEmptyPart())
     }
   }
 
@@ -61,29 +62,39 @@ export class AddWordComponent implements OnInit {
     }
   }
 
+  getEmptyPart(): Part {
+    return {
+      name: '',
+      definitions: [this.emptyDefinition()],
+      synonyms: [],
+      antonyms: []
+    }
+  }
+
   // todo move to static class
+
+  emptyDefinition(): Definition {
+    return {
+      name: '',
+      phrases: [
+        {name: ''}
+      ]
+    }
+  }
+
   word: Word = {
     name: '',
-    definition: '',
     parts: [
       {
         name: '',
-        synonyms: [
-          ''
-        ],
-        antonyms: [
-          ''
-        ],
-        definitions: [
-          {
-            name: '',
-            phrases: [
-              {name: ''}
-            ]
-          }
-        ]
+        synonyms: [this.getEmptyPart()],
+        antonyms: [this.getEmptyPart()],
+        definitions: [this.emptyDefinition()]
       }
     ]
   }
 
+  addPart() {
+    this.word.parts.push(this.getEmptyPart())
+  }
 }
