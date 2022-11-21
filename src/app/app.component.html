@@ -2,10 +2,9 @@
   <div>
     <app-search-line (prefixUpdated)="findWordByPrefix($event)"></app-search-line>
 
-    <div *ngIf="!wordNotFound()">
-      <p>Results from DB:</p>
-      <app-word *ngFor="let word of wordsFound" [word]="word"></app-word>
-    </div>
+
+    <p>Results from DB:</p>
+    <app-add-word *ngFor="let word of wordsFound" [word]="word" [modifyWord] = false></app-add-word>
 
     <!-- на самом деле логика сложнее - если в возвращенном списке нет точно такого же слова - тогда появится кнопка добавить -->
     <button class="btn" (click)="addNewWordClicked()">
@@ -17,10 +16,8 @@
     </div>
 
 
-
-<!--    <button style="margin-bottom: 1rem;" class="btn">Find a word in an internet</button>-->
-<!--    <p>definition from internet / or info that no definitions found</p>-->
-
+    <!--    <button style="margin-bottom: 1rem;" class="btn">Find a word in an internet</button>-->
+    <!--    <p>definition from internet / or info that no definitions found</p>-->
 
 
   </div>

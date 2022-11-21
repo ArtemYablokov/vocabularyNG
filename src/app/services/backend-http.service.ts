@@ -22,14 +22,16 @@ export class BackendHttpService {
 
     const url = 'http://localhost:8080/find';
 
-    this.http.get<string[]>(url, {params: new HttpParams().set("prefix", prefix)})
+    this.http.get<Word[]>(url, {params: new HttpParams().set("prefix", prefix)})
       .subscribe(response => {
-        console.log(response)
-        // if (response) {
-        //   response.forEach(str => {
-        //     result.push({name: prefix, definition: str})
-        //   })
-        // }
+        if (response) {
+
+          // todo WHY can't assign directly response to array ???
+          // result = response
+          response.forEach(str => {
+            result.push(str)
+          })
+        }
       })
 
     return result
@@ -42,7 +44,7 @@ export class BackendHttpService {
         response => {
           console.log(response)
 
-          result = response
+          // result = response
         })
     return result
   }

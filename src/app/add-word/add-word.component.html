@@ -3,15 +3,11 @@
   <!-- open new sub-window - not call a method to save word! -->
   <!--  it should be выпадающий block, when click "add word" button at parent component -->
 
-  <!--  <input type="text" class="form-control" [(ngModel)]="definition" placeholder="definition">-->
-  <!--  <input type="text" class="form-control" placeholder="Text...">-->
-  <!--  <div style="display: inline">-->
-  <!--    <div>one</div>-->
-  <!--    <div>two</div>-->
-  <!--  </div>-->
-
 
   <div>
+
+    <H1 *ngIf="!modifyWord">{{word.name}}</H1>
+
     <div style="border-left: black" *ngFor="let part of word.parts; let idx = index">
       <h2>Part of speech:</h2>
       <input type="text" class="form-control" placeholder="part of speech..." [(ngModel)]="part.name">
@@ -28,26 +24,26 @@
               <input type="text" class="form-control" placeholder="phrase..." [(ngModel)]="phrase.name">
               <!--value="{{phrase.name}}">-->
             </div>
-            <button class="btn" (click)="addPhrase(part, index)">add new Phrase</button>
+            <button *ngIf="modifyWord" class="btn" (click)="addPhrase(part, index)">add new Phrase</button>
           </div>
         </div>
-        <button style="margin-bottom: 1rem;" class="btn" (click)="addDefinition(part)">add new Definition</button>
-
+        <button *ngIf="modifyWord" style="margin-bottom: 1rem;" class="btn" (click)="addDefinition(part)">add new Definition</button>
 
         <h3>Synonyms:</h3>
         <div style="margin-left: 1rem" *ngFor="let synonym of part.synonyms">
           <input type="text" class="form-control" placeholder="synony..." [(ngModel)]="synonym.name">
         </div>
-        <button style="margin-bottom: 1rem;" class="btn" (click)="addSynonym(part)">add new synonym</button>
+        <button *ngIf="modifyWord" style="margin-bottom: 1rem;" class="btn" (click)="addSynonym(part)">add new synonym</button>
         <h3>Antonyms:</h3>
         <div style="margin-left: 1rem" *ngFor="let antonym of part.antonyms">
           <input type="text" class="form-control" placeholder="antonym..." [(ngModel)]="antonym.name">
         </div>
-        <button style="margin-bottom: 1rem;" class="btn" (click)="addAntonym(idx)">add new antonym</button>
+        <button *ngIf="modifyWord" style="margin-bottom: 1rem;" class="btn" (click)="addAntonym(idx)">add new antonym</button>
 
       </div>
     </div>
-    <button style="margin-bottom: 1rem;" class="btn" (click)="addPart()">add new part</button>
+    <button *ngIf="modifyWord" style="margin-bottom: 1rem;" class="btn" (click)="addPart()">add new part</button>
   </div>
-  <button class="btn" (click)="addNewWord()">Save</button>
+
+  <button *ngIf="modifyWord" class="btn" (click)="addNewWord()">Save</button>
 </div>

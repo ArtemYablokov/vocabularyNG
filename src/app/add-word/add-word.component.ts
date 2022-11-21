@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Definition, Part, Word} from "../model/Word";
+import {Definition, Part, Word, SynonymAntonym} from "../model/Word";
 import {BackendHttpService} from "../services/backend-http.service";
 
 @Component({
@@ -13,9 +13,23 @@ export class AddWordComponent implements OnInit {
   }
 
   @Input() wordToSave!: string
+  @Input() modifyWord: boolean = true
   @Output() resetBoolean = new EventEmitter<string>();
 
   definition?: string
+
+  @Input()
+  word: Word = {
+    name: '',
+    parts: [
+      {
+        name: '',
+        synonyms: [this.getEmptySynAnt()],
+        antonyms: [this.getEmptySynAnt()],
+        definitions: [this.emptyDefinition()]
+      }
+    ]
+  }
 
   ngOnInit(): void {
   }
@@ -43,12 +57,7 @@ export class AddWordComponent implements OnInit {
     const parts = this.word.parts;
     const componentPart = parts.find(p => p.name === part.name);
     if (componentPart) {
-      componentPart.definitions.push({
-        name: '',
-        phrases: [
-          {name: ''}
-        ]
-      })
+      componentPart.definitions.push(this.emptyDefinition())
     }
   }
 
@@ -58,8 +67,11 @@ export class AddWordComponent implements OnInit {
     if (componentPart) {
       const definitions: Definition[] = componentPart.definitions;
       definitions[idx].phrases.push({name: ''})
-
     }
+  }
+
+  addPart() {
+    this.word.parts.push(this.getEmptyPart())
   }
 
   getEmptyPart(): Part {
@@ -68,6 +80,12 @@ export class AddWordComponent implements OnInit {
       definitions: [this.emptyDefinition()],
       synonyms: [],
       antonyms: []
+    }
+  }
+
+  getEmptySynAnt(): SynonymAntonym {
+    return {
+      name: '',
     }
   }
 
@@ -80,21 +98,5 @@ export class AddWordComponent implements OnInit {
         {name: ''}
       ]
     }
-  }
-
-  word: Word = {
-    name: '',
-    parts: [
-      {
-        name: '',
-        synonyms: [this.getEmptyPart()],
-        antonyms: [this.getEmptyPart()],
-        definitions: [this.emptyDefinition()]
-      }
-    ]
-  }
-
-  addPart() {
-    this.word.parts.push(this.getEmptyPart())
   }
 }

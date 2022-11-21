@@ -26,7 +26,12 @@ export class AppComponent implements OnInit {
 
   findWordByPrefix(prefix: string) {
     this.searchedPrefix = prefix
-    this.wordsFound = prefix.trim() ? this.backendService.getWordsFromServer(prefix) : [];
+
+    let response: Word[] = []
+    if (prefix.trim()){
+      response = this.backendService.getWordsFromServer(prefix)
+    }
+    this.wordsFound = response;
   }
 
   wordNotFound() {
@@ -34,7 +39,8 @@ export class AppComponent implements OnInit {
 
     if (this.searchedPrefix) {
       const word = this.wordsFound.find(w => w.name == this.searchedPrefix);
-      debugger
+
+      // debugger
       return word === undefined
     } else
       return true

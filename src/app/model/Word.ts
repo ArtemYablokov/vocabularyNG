@@ -1,7 +1,7 @@
 
 export interface Word {
   name: string
-  searches?: number
+  numberOfSearches?: number
   parts: Part[]
 }
 
@@ -22,7 +22,7 @@ interface Phrase {
   name: string
 }
 
-interface SynonymAntonym {
+export interface SynonymAntonym {
   name: string
 }
 
